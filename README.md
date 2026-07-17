@@ -56,6 +56,62 @@ pip install -r requirements.txt
 python main.py
 ```
 
+## Instalação no Windows (passo a passo)
+
+1. **Instale o Python 3.11+** em https://www.python.org/downloads/windows/
+   (baixe o instalador oficial, não use a versão da Microsoft Store).
+   Na primeira tela do instalador, marque a opção **"Add python.exe to PATH"**
+   antes de clicar em Install.
+
+2. **Baixe/clone o projeto** e abra o PowerShell (ou Prompt de Comando) na
+   pasta `Central-serial`:
+   ```powershell
+   git clone <url-do-repositorio>
+   cd Central-serial
+   ```
+   Se preferir sem git, baixe o ZIP do repositório (botão "Code" → "Download
+   ZIP") e extraia a pasta.
+
+3. **Crie e ative o ambiente virtual:**
+   ```powershell
+   python -m venv .venv
+   .venv\Scripts\activate
+   ```
+   Se o PowerShell bloquear a ativação com erro de "execution policy", rode
+   uma vez (como usuário normal, não precisa ser admin):
+   ```powershell
+   Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+   ```
+
+4. **Instale as dependências:**
+   ```powershell
+   pip install -r requirements.txt
+   ```
+
+5. **Execute:**
+   ```powershell
+   python main.py
+   ```
+
+### Observações específicas do Windows
+
+- **Porta serial (UART/RS232/RS485/Modbus/SCPI):** o Windows já reconhece
+  conversores USB-serial comuns (FTDI, CP210x, CH340) automaticamente via
+  Windows Update. Se a porta não aparecer no botão "Atualizar" do painel,
+  verifique no **Gerenciador de Dispositivos** se o driver do chip
+  USB-serial está instalado (baixe do fabricante do conversor, ex.:
+  FTDI VCP driver, CP210x driver, CH340 driver). A porta aparecerá como
+  `COM3`, `COM4`, etc.
+- **CAN Bus:** o Windows não tem suporte nativo a `socketcan` (exclusivo
+  Linux). Use uma interface suportada pelo `python-can` no Windows, como
+  **PCAN (Peak-System)**, **Vector**, **Kvaser** ou **IXXAT**, instalando o
+  driver/DLL do fabricante e selecionando a interface correspondente na UI.
+  Para testar sem hardware CAN físico, use a interface `virtual`.
+- **Antivírus/SmartScreen:** como o projeto roda via `python main.py` (não é
+  um `.exe`), não deve haver bloqueio, mas se o Windows Defender alertar na
+  primeira execução, escolha "Executar assim mesmo" — o código é aberto e
+  pode ser conferido neste repositório.
+
 ## Testes
 
 A camada `protocols/` não depende de Qt/pyserial/python-can e pode ser
