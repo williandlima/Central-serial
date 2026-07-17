@@ -50,12 +50,6 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## Execução
-
-```bash
-python main.py
-```
-
 ## Instalação no Windows (passo a passo)
 
 1. **Instale o Python 3.11+** em https://www.python.org/downloads/windows/
@@ -111,6 +105,12 @@ python main.py
   um `.exe`), não deve haver bloqueio, mas se o Windows Defender alertar na
   primeira execução, escolha "Executar assim mesmo" — o código é aberto e
   pode ser conferido neste repositório.
+
+## Execução
+
+```bash
+python main.py
+```
 
 ## Testes
 
